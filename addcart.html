@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        img{
+            border: 2px solid black;
+        }
+        p{
+            width: 150px;
+            border: 2px solid black; 
+            height:73px;  
+            font-size: larger;
+            font-weight:bolder ;
+        }
+        body{
+            background-color: #8EC5FC;
+            background-image: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);
+        }
+        #remove{
+            width :120px;
+            font-weight:bold;
+        }
+    </style>
+</head>
+<body>
+   
+
+    <script>
+    let g1=localStorage.getItem("cart1")
+
+    let va=JSON.parse(g1)
+    
+    for(let i=0;i<va.length;i++){
+        var im1=document.createElement("img")
+        im1.setAttribute("src",va[i].image)
+        im1.style.width="150px"
+        document.body.appendChild(im1)
+
+        var p2=document.createElement("p")
+        p2.innerHTML="Price : ₹ " + va[i].price
+
+        if(va[i].quantity){
+            p2.innerHTML  += "<br>(Quantity : " + va[i].quantity + ")<br>"
+        }
+        document.body.appendChild(p2)
+
+        bt3=document.createElement("button")
+        bt3.setAttribute("id","remove")
+        bt3.innerHTML=" Remove Item"
+        bt3.addEventListener("click", function() {
+        va.splice(i, 1);        
+        localStorage.setItem("cart1", JSON.stringify(va));
+        
+        im1.remove();
+        p2.remove();
+        bt3.remove();
+        location.reload();
+        alert("Removed from cart successfully")
+        });
+        p2.appendChild(bt3);
+    }
+        
+        
+    </script>
+</body>
+</html>

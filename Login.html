@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        text-align: center;
+        background: url(https://images.pexels.com/photos/2310713/pexels-photo-2310713.jpeg?auto=compress&cs=tinysrgb&w=600);
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+      form input {
+        width: 250px;
+        height: 30px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Login</h1>
+    <form>
+      <input type="text" placeholder="Username/E-Mail" /><br /><br />
+      <input type="password" placeholder="Password" /><br /><br />
+      <input type="submit" value="submit" style="width: 90px" />
+    </form>
+
+    <script>
+      let getData = JSON.parse(localStorage.getItem("data"))||[];
+      let fom = document.forms;
+
+      fom[0].addEventListener("submit", (eve) => {
+        eve.preventDefault();
+
+        var enteredUser = eve.target[0].value;
+        var enteredPass = eve.target[1].value;
+
+        let userFound=getData.some(user=>(user.username===enteredUser|| user.email===enteredUser)&&user.password==enteredPass)
+        if(userFound){
+            alert("Login Successfull")
+            window.location.assign("page.html")
+        }else{
+            alert("Invalid Credentials")
+        }
+      });
+    </script>
+  </body>
+</html>
